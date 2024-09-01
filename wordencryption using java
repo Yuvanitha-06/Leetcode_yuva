@@ -1,0 +1,37 @@
+public class WordEncryption {
+    
+    public static String encryptString(String input1, int input2) {
+        StringBuilder encrypted = new StringBuilder();
+        
+        for (char ch : input1.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                int charValue;
+                if (Character.isLowerCase(ch)) {
+                    charValue = ch - 'a';  // Map 'a' to 0, 'b' to 1, ..., 'z' to 25
+                } else {
+                    charValue = ch - 'A';  // Map 'A' to 0, 'B' to 1, ..., 'Z' to 25
+                }
+
+              
+                int encryptedValue = (charValue + input2) % 26;
+                if (Character.isLowerCase(ch)) {
+                    encrypted.append((char) ('A' + encryptedValue));  // Convert to uppercase
+                } else {
+                    encrypted.append((char) ('a' + encryptedValue));  // Convert to lowercase
+                }
+            } else {
+                encrypted.append(ch);
+            }
+        }
+        
+        return encrypted.toString();
+    }
+
+    public static void main(String[] args) {
+        String input1 = "Wipro Tech";
+        int input2 = 20;
+        
+        String result = encryptString(input1, input2);
+        System.out.println("Encrypted words: " + result); 
+    }
+}
